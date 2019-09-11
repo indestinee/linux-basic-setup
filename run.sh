@@ -26,9 +26,6 @@ python3 install.py
 cd -
 
 echo 5. setup tmux
-cp otf/PowerlineSymbols.otf /usr/local/share/fonts
-sudo fc-cache -fv
-
 cd
 git clone https://github.com/indestinee/.tmux.git --depth 1
 ln -s -f .tmux/.tmux.conf
