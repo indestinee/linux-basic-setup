@@ -10,3 +10,13 @@ source $ZSH/oh-my-zsh.sh
 unsetopt nomatch
 
 alias pp='fzf --preview '"'"'[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file || (rougify {}  || highlight -O ansi -l {} || coderay {} || cat {}) 2> /dev/null | head -500'"'"
+
+# git alias
+alias gti='git'
+alias gs='git status'
+alias ga='git add'
+alias gd='git diff'
+alias gg='git log --all --decorate --oneline --graph'
+alias gc='git commit'
+alias gpush='git push'
+alias gpull='git pull'

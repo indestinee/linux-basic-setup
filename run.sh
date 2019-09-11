@@ -32,6 +32,4 @@ ln -s -f .tmux/.tmux.conf
 ln -s .tmux/.tmux.conf.local .
 cd -
 
-
-
 zsh
