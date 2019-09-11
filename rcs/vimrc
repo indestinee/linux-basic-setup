@@ -1,0 +1,136 @@
+set nocompatible
+
+filetype plugin indent on
+syntax on
+" @vundle{{{
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'tpope/vim-commentary'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'iamcco/markdown-preview.vim'
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'majutsushi/tagbar'
+Plugin 'vim-airline/vim-airline'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'junegunn/fzf.vim'
+Bundle 'Valloric/YouCompleteMe'
+call vundle#end()
+"}}}
+" @nerdtree {{{
+let NERDTreeShowLineNumbers=1
+let NERDTreeAutoCenter=1
+let NERDTreeIgnore=['\.pyc','\~$','\.swp']
+" }}}
+" @fzf {{{
+set rtp+=~/.fzf
+" git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+" ~/.fzf/install
+" }}}
+" @youcompleteme {{{
+let g:ycm_auto_trigger=1
+let g:ycm_add_preview_to_completeopt=1
+let g:ycm_min_num_of_chars_for_completion=2
+let g:ycm_autoclose_preview_window_after_insertion=1
+" let g:ycm_autoclose_preview_window_after_completion=1
+" let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py' " C++
+
+nnoremap ga :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap gs :YcmCompleter GoToDeclaration<CR>
+nnoremap gd :YcmCompleter GetDoc<CR>
+nnoremap gf :YcmCompleter FixIt<CR>
+nnoremap gz :YcmCompleter GoToInclude<CR>
+" }}}
+" @airline {{{
+let g:airline_section_b = '%{strftime("%Y/%m/%d %H:%M:%S")}'
+"}}}
+
+let line='normal'
+set number
+
+set expandtab
+set sts=4 sw=4 ts=4
+
+" @serach
+set hls
+set incsearch
+set ignorecase
+
+set fileencodings=utf-8,gb2312,gbk,gb18030
+
+" @folder
+set foldcolumn=4
+set foldenable
+set foldlevel=100
+set foldmethod=marker
+
+set showcmd
+
+" @mouse
+set mouse=a
+set selection=exclusive
+set selectmode=mouse,key
+
+set title
+set backupcopy=yes
+set backspace=indent,eol,start
+set clipboard=unnamed
+set autochdir
+set autoindent
+set nobackup
+set pastetoggle=``
+set shortmess=atl
+set ttyfast
+
+
+" @shortcut {{{
+:command W w
+:command WQ wq
+:command Wq wq
+:command Q q
+nmap <F3> :call SwitchNum()<CR>
+nmap <F4> :Commentary<CR>
+nmap <F5> :NERDTreeToggle<CR>
+nmap <F6> :TagbarToggle<CR>
+
+map <F9>      : call Compile()<CR>
+map <F10>     : call Run()<CR>
+
+nmap <s-tab> <<
+nmap <tab> >>
+" }}}
+
+function SwitchNum() " {{{
+    if &rnu == 1
+        exec ':set nornu'
+    else
+        exec ':set rnu'
+    endif
+endfunc
+" }}}
+
+function Compile() " {{{
+    exec "w"
+    if &filetype == "c" || &filetype == "h"
+        exec ":! clear; gcc % -o %:r -Wall; if [ $? = 0 ]; then echo '\033[1;32;m[SUC] Compile Succeed..\033[0m'; else echo '\033[1;31;m[ERR] Compile Error..\033[0m'; fi;"
+    elseif &filetype == "cpp" || &filetype == "hpp"
+        exec ":! clear; g++ % -o %:r -Wall; if [ $? = 0 ]; then echo '\033[1;32;m[SUC] Compile Succeed..\033[0m'; else echo '\033[1;31;m[ERR] Compile Error..\033[0m'; fi;"
+    elseif &filetype == "python"
+        exec ":! clear; python3 %"
+    elseif &filetype == "sh"
+        exec ":! chmod +x %"
+    endif
+endfunction
+" }}}
+
+function Run() " {{{
+    if &filetype == "cpp" || &filetype == "c" 
+        exec ":! clear; ./%:r;"
+    elseif &filetype == "sh"
+        exec ":! clear; ./%"
+    elseif &filetype == "python"
+        exec ":! clear; python3 %"
+    endif
+endfunction
+" }}}
