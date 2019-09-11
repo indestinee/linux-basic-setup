@@ -13,6 +13,8 @@ unsetopt nomatch
 alias pp='fzf --preview '"'"'[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file || (rougify {}  || highlight -O ansi -l {} || coderay {} || cat {}) 2> /dev/null | head -500'"'"
 
 # git alias
+alias gt='git'
+alias gi='git'
 alias gti='git'
 alias ga='git add'
 alias gs='git status'
@@ -40,4 +42,11 @@ alias ta='tmux a -t'
 alias ts='tmux new -s'
 alias tn='tmux new'
 
-
+# other alias
+alias c='cd'
+alias t='tree'
+alias h='htop'
+alias g='gtop'
+alias e='echo'
+alias w='which'
+alias d='df -hT'
