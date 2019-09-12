@@ -3,7 +3,7 @@ set nocompatible
 filetype plugin indent on
 
 syntax on
-" @vundle{{{
+" @vundle {{{
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'dense-analysis/ale'
@@ -20,16 +20,15 @@ Plugin 'junegunn/fzf.vim'
 Bundle 'Valloric/YouCompleteMe'
 Plugin 'airblade/vim-gitgutter'
 call vundle#end()
-"}}}
+" }}}
+
+" @fzf {{{
+set rtp+=~/.fzf
+" }}}
 " @nerdtree {{{
 let NERDTreeShowLineNumbers=1
 let NERDTreeAutoCenter=1
-let NERDTreeIgnore=['\.pyc','\~$','\.swp']
-" }}}
-" @fzf {{{
-set rtp+=~/.fzf
-" git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-" ~/.fzf/install
+let NERDTreeIgnore=['\.pyc', '\~$', '\.swp']
 " }}}
 " @youcompleteme {{{
 let g:ycm_auto_trigger=1
