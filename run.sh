@@ -16,6 +16,7 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf --depth 1
 
 echo 4. setup vim
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim --depth 1
+pip3 install pylint flake8
 cp $cur_dir/rcs/vimrc $HOME/.vimrc
 vim << EOF
 :PluginInstall

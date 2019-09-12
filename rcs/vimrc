@@ -1,10 +1,12 @@
 set nocompatible
 
 filetype plugin indent on
+
 syntax on
 " @vundle{{{
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+Plugin 'dense-analysis/ale'
 Plugin 'tpope/vim-commentary'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
@@ -16,6 +18,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'junegunn/fzf.vim'
 Bundle 'Valloric/YouCompleteMe'
+Plugin 'airblade/vim-gitgutter'
 call vundle#end()
 "}}}
 " @nerdtree {{{
@@ -45,6 +48,39 @@ nnoremap gz :YcmCompleter GoToInclude<CR>
 " @airline {{{
 let g:airline_section_b = '%{strftime("%Y/%m/%d %H:%M:%S")}'
 "}}}
+" @git {{{
+let g:gitgutter_max_signs = 500
+highlight GitGutterAdd    guifg=#44ff44 ctermfg=2
+highlight GitGutterChange guifg=#bbbb00 ctermfg=3
+highlight GitGutterDelete guifg=#ff2222 ctermfg=1
+" }}}
+" @ale {{{
+let g:ale_completion_enabled = 1
+let g:ale_sign_column_always = 1
+" let g:ale_set_highlights = 0
+highlight clear ALEErrorSign
+highlight clear ALEWarningSign
+highlight ALEWarningSign ctermfg=166
+highlight ALEWarning ctermfg=166 cterm=underline,bold
+highlight ALEErrorSign ctermfg=1
+highlight ALEError ctermfg=1 cterm=underline,bold
+
+let g:ale_linters= {
+\   'python': ['flake8', 'pylint'],
+\}
+let g:ale_python_flake8_options = '--ignore=E501,W291'
+let g:ale_python_pylint_options = ''
+
+let g:ale_sign_error = 'xx'
+let g:ale_sign_warning = '>>'
+let g:airline#extensions#ale#enabled = 1
+
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] [%severity%] %s '
+
+
+" }}}
 
 let line='normal'
 set number
@@ -89,6 +125,8 @@ set ttyfast
 :command WQ wq
 :command Wq wq
 :command Q q
+
+nmap <F2> :call TurnOnGit()<CR>
 nmap <F3> :call SwitchNum()<CR>
 nmap <F4> :Commentary<CR>
 nmap <F5> :NERDTreeToggle<CR>
@@ -101,6 +139,17 @@ nmap <s-tab> <<
 nmap <tab> >>
 " }}}
 
+let g:githighlight=0
+function TurnOnGit() " {{{
+    if g:githighlight == 0
+        exec 'GitGutterLineHighlightsEnable'
+        let g:githighlight = 1
+    else
+        exec 'GitGutterLineHighlightsDisable'
+        let g:githighlight = 0
+    endif
+endfunction
+" }}}
 function SwitchNum() " {{{
     if &rnu == 1
         exec ':set nornu'
@@ -125,7 +174,7 @@ endfunction
 " }}}
 
 function Run() " {{{
-    if &filetype == "cpp" || &filetype == "c" 
+    if &filetype == "cpp" || &filetype == "c"
         exec ":! clear; ./%:r;"
     elseif &filetype == "sh"
         exec ":! clear; ./%"
