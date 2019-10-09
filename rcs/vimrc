@@ -64,10 +64,7 @@ highlight ALEWarning ctermfg=166 cterm=underline,bold
 highlight ALEErrorSign ctermfg=1
 highlight ALEError ctermfg=1 cterm=underline,bold
 
-let g:ale_linters= {
-\   'python': ['flake8', 'pylint'],
-\}
-let g:ale_python_flake8_options = '--ignore=E501,W291'
+let g:ale_linters= {'python': ['pylint']}
 let g:ale_python_pylint_options = ''
 
 let g:ale_sign_error = 'xx'
@@ -117,6 +114,9 @@ set nobackup
 set pastetoggle=``
 set shortmess=atl
 set ttyfast
+
+set colorcolumn=81
+highlight ColorColumn ctermbg=gray
 
 
 " @shortcut {{{

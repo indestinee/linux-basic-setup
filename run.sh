@@ -1,6 +1,7 @@
 cur_dir=$(dirname "$0")
 echo 1. install basic packages by apt install
-sudo apt install ctags vim vim-gnome highlight git cmake zsh python3 python3-dev python3-pip tmux
+sudo apt update; sudo apt upgrade -y; sudo apt autoremove -y;
+sudo apt install ctags vim vim-gnome highlight git cmake zsh python3 python3-dev python3-pip tmux -y;
 
 echo 2. setup zsh
 echo remember to enter 'exit' after finish install oh my zsh [Press Enter]
@@ -16,7 +17,7 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf --depth 1
 
 echo 4. setup vim
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim --depth 1
-pip3 install pylint flake8
+pip3 install pylint
 cp $cur_dir/rcs/vimrc $HOME/.vimrc
 vim << EOF
 :PluginInstall
