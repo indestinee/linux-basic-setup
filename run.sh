@@ -1,7 +1,7 @@
 cur_dir=$(dirname "$0")
 echo 1. install basic packages by apt install
 sudo apt update; sudo apt upgrade -y; sudo apt autoremove -y;
-sudo apt install ctags vim vim-gnome highlight git cmake zsh python3 python3-dev python3-pip tmux -y;
+sudo apt install ctags vim vim-gnome highlight git cmake zsh python3 python3-dev python3-pip tmux net-tools -y;
 pip3 install pip --upgrade
 pip3 install setuptools
 
