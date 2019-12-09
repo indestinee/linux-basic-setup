@@ -2,6 +2,8 @@ cur_dir=$(dirname "$0")
 echo 1. install basic packages by apt install
 sudo apt update; sudo apt upgrade -y; sudo apt autoremove -y;
 sudo apt install ctags vim vim-gnome highlight git cmake zsh python3 python3-dev python3-pip tmux -y;
+pip3 install pip --upgrade
+pip3 install setuptools
 
 echo 2. setup zsh
 echo remember to enter 'exit' after finish install oh my zsh [Press Enter]
