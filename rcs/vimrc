@@ -154,7 +154,6 @@ let g:ale_echo_msg_format = '[%linter%] [%severity%] %s '
 
 " @vimset {{{
 syntax on
-color mine
 
 au BufNewFile,BufRead string,map,set,unordered_map,unordered_set,vector,deque,queue,list,algorithm,stack setf cpp
 
